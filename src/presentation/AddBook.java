@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import com.sun.jdi.connect.spi.Connection;
 
 import business.Books;
+import data.DataSQL;
 import data.TextIO;
 
 import javax.swing.JComboBox;
@@ -37,9 +38,6 @@ public class AddBook {
 	private JTextField txtBookTitle;
 	private JTextField txtIsbn;
 	private JComboBox comboBoxCategory;
-	private java.sql.Connection con = null;
-	private PreparedStatement pst = null;
-	private ResultSet rs = null;
 	
 
 	/**
@@ -78,6 +76,8 @@ public class AddBook {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} //;
+				
+				
 			}
 		});
 		frame.setBounds(100, 100, 864, 521);
@@ -130,21 +130,8 @@ public class AddBook {
 		JButton btnNewButton = new JButton("ADD");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-				String sql = "INSERT INTO book"
-						+ "(Authour_Name, Book_Title, ISBN , Category)"
-						+ "VALUES (?,?,?,?)";
-				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Library","root","");
-				pst = con.prepareStatement(sql);
-				pst.setString(1,txtAuthorName.getText());
-				pst.setString(2,txtBookTitle.getText());
-				pst.setString(3,txtIsbn.getText());
-				pst.setString(4, comboBoxCategory.getSelectedItem()+"");
-				pst.executeUpdate();
-				JOptionPane.showMessageDialog(null, "Inserted data successfuly");
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
+				DataSQL ds = new DataSQL();
+				ds.AddBooks(txtAuthorName.getText() , txtBookTitle.getText() , txtIsbn.getText(), comboBoxCategory.getSelectedObjects() +"");
 			}
 		});
 		btnNewButton.setForeground(Color.BLACK);
@@ -155,7 +142,7 @@ public class AddBook {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				frame.dispose();
 			}
 		});
 		btnCancel.setForeground(Color.BLACK);

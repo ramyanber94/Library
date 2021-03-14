@@ -154,7 +154,7 @@ public class UpdateBook extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				dispose();
 			}
 		});
 		btnCancel.setForeground(Color.BLACK);

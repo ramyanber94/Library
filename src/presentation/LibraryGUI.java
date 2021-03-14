@@ -35,6 +35,7 @@ public class LibraryGUI {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the application.
@@ -92,7 +93,19 @@ public class LibraryGUI {
 		JMenuItem mntmUpdate = new JMenuItem("Update");
 		mntmUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AddBook ad = null;
+				try {
+					ad = new  AddBook();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				DisplayBooks db = new DisplayBooks();
+				RemoveBook rb = new RemoveBook();
 				UpdateBook ub = new UpdateBook();
+				ad.frame.dispose();
+				db.dispose();
+				rb.dispose();
 				ub.setVisible(true);
 			}
 		});
@@ -101,8 +114,20 @@ public class LibraryGUI {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Display");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AddBook ad = null;
+				try {
+					ad = new  AddBook();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				DisplayBooks db = new DisplayBooks();
+				RemoveBook rb = new RemoveBook();
+				UpdateBook ub = new UpdateBook();
+				ad.frame.dispose();
 				db.setVisible(true);
+				rb.dispose();
+				ub.dispose();
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);

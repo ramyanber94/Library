@@ -84,7 +84,7 @@ public class RemoveBook extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				dispose();
 			}
 		});
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 19));

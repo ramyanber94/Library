@@ -6,7 +6,8 @@ public class Books {
 	public static final int MAX_BOOK_TITLE_SIZE = 20;
 	public static final int MAX_CATEGORY_SIZE = 10;
 	private String authorName , bookTitle, category;
-	private int isbn , bookId;
+	private long isbn;
+	private int bookId;
 	public String getAuthorName() {
 		return authorName;
 	}
@@ -25,10 +26,10 @@ public class Books {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public int getIsbn() {
+	public long getIsbn() {
 		return isbn;
 	}
-	public void setIsbn(int isbn) {
+	public void setIsbn(long isbn) {
 		this.isbn = isbn;
 	}
 	public int getBookId() {
