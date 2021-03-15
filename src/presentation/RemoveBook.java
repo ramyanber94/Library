@@ -1,43 +1,37 @@
 package presentation;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JSpinner;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+
+import datasource.DataSQL;
 
 public class RemoveBook extends JFrame {
 
+
+	private static final long serialVersionUID = 3317976302754775643L;
 	private JPanel contentPane;
-	private java.sql.Connection con = null;
-	private PreparedStatement pst = null;
-	private ResultSet rs = null;
+	private JTextField txtIsbn;
 
 	/**
 	 * Launch the application.
 	 */
-			public void run() {
-				try {
-					RemoveBook frame = new RemoveBook();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+	public void run() {
+		try {
+			RemoveBook frame = new RemoveBook();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Create the frame.
@@ -50,37 +44,28 @@ public class RemoveBook extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Book ID :");
+
+		JLabel lblNewLabel = new JLabel("ISBN :");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setBounds(57, 52, 113, 32);
 		contentPane.add(lblNewLabel);
-		
-		JSpinner spinBookID = new JSpinner();
-		spinBookID.setBounds(346, 61, 60, 20);
-		contentPane.add(spinBookID);
-		
+
 		JButton btnRemove = new JButton("Remove");
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					int BookID = (Integer) spinBookID.getValue();
-					String sql = "DELETE FROM book WHERE BookID = ?";
-					con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Library","root","");
-					pst = con.prepareStatement(sql);
-					pst.setInt(1, BookID);
-					pst.executeUpdate();
-					JOptionPane.showMessageDialog(null, "Delete data successfuly");
-					} catch (SQLException ex) {
-						ex.printStackTrace();
-					}
+				boolean result = DataSQL.DeleteBook(Long.parseLong(txtIsbn.getText()));
+				if (result) {
+				JOptionPane.showMessageDialog(null, "Delete data successfuly");
+				} else {
+					JOptionPane.showMessageDialog(null, "Error while deleting book");
+				}
 			}
 		});
 		btnRemove.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 19));
 		btnRemove.setBounds(72, 124, 142, 39);
 		contentPane.add(btnRemove);
-		
+
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -90,5 +75,10 @@ public class RemoveBook extends JFrame {
 		btnCancel.setFont(new Font("Tahoma", Font.BOLD, 19));
 		btnCancel.setBounds(299, 124, 142, 39);
 		contentPane.add(btnCancel);
+
+		txtIsbn = new JTextField();
+		txtIsbn.setBounds(260, 61, 121, 19);
+		contentPane.add(txtIsbn);
+		txtIsbn.setColumns(10);
 	}
 }

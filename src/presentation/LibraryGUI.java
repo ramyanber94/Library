@@ -1,20 +1,18 @@
 package presentation;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.Color;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import javax.swing.event.MenuKeyListener;
-import javax.swing.event.MenuKeyEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class LibraryGUI {
 
@@ -35,7 +33,6 @@ public class LibraryGUI {
 			}
 		});
 	}
-	
 
 	/**
 	 * Create the application.
@@ -52,35 +49,31 @@ public class LibraryGUI {
 		frmLibrary.setTitle("Library");
 		frmLibrary.setBounds(100, 100, 790, 475);
 		frmLibrary.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JLabel lblNewLabel = new JLabel("Welcome to the Library windows application");
 		lblNewLabel.setForeground(new Color(255, 0, 0));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 22));
 		frmLibrary.getContentPane().add(lblNewLabel, BorderLayout.CENTER);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frmLibrary.setJMenuBar(menuBar);
-		
+
 		JMenu mnNewMenu = new JMenu("File");
 		menuBar.add(mnNewMenu);
-		
+
 		JMenuItem mntmAdd = new JMenuItem("Add");
 		mntmAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddBook b;
-				try {
-					b = new AddBook();
-					b.frame.setVisible(true);
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
+
+				b = new AddBook();
+				b.frame.setVisible(true);
+
 			}
 		});
 		mnNewMenu.add(mntmAdd);
-		
+
 		JMenuItem mntmRemove = new JMenuItem("Remove");
 		mntmRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,17 +82,14 @@ public class LibraryGUI {
 			}
 		});
 		mnNewMenu.add(mntmRemove);
-		
+
 		JMenuItem mntmUpdate = new JMenuItem("Update");
 		mntmUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddBook ad = null;
-				try {
-					ad = new  AddBook();
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+
+				ad = new AddBook();
+
 				DisplayBooks db = new DisplayBooks();
 				RemoveBook rb = new RemoveBook();
 				UpdateBook ub = new UpdateBook();
@@ -110,17 +100,14 @@ public class LibraryGUI {
 			}
 		});
 		mnNewMenu.add(mntmUpdate);
-		
+
 		JMenuItem mntmNewMenuItem = new JMenuItem("Display");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddBook ad = null;
-				try {
-					ad = new  AddBook();
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+
+				ad = new AddBook();
+
 				DisplayBooks db = new DisplayBooks();
 				RemoveBook rb = new RemoveBook();
 				UpdateBook ub = new UpdateBook();
@@ -131,13 +118,13 @@ public class LibraryGUI {
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
-		
+
 		JMenu mnNewMenu_1 = new JMenu("Services");
 		menuBar.add(mnNewMenu_1);
-		
+
 		JMenuItem mntmBooking = new JMenuItem("Booking");
 		mnNewMenu_1.add(mntmBooking);
-		
+
 		JMenuItem mntmBuy = new JMenuItem("Buy");
 		mnNewMenu_1.add(mntmBuy);
 	}
